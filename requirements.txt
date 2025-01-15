@@ -4,6 +4,8 @@ numpy
 seaborn
 scipy
 scikit-learn
-imblearn
+imbalanced-learn
+xgboost
+catboost
 pymongo
 # -e .
