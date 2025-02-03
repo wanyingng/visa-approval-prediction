@@ -21,11 +21,11 @@ Successful implementation of this model will reduce processing time and administ
 **Source**: [Kaggle - EasyVisa Dataset](https://www.kaggle.com/datasets/moro23/easyvisa-dataset)
 
 **Description**:
-This dataset comprises a comprehensive set of attributes related to foreign employees who applied for a United States visa. These attributes encompass:
+- This dataset comprises a comprehensive set of attributes related to foreign employees who applied for a United States visa. These attributes encompass:
     - **Demographic Information:** Continent of origin, employee's education level, prevailing wage, and unit of wage.
     - **Employment History:** Prior work experience, requirement for job training, and whether the position is full-time.
     - **Employer Background:** Number of employees, year of establishment, and region of employment.
-The dataset also includes the final disposition of each application, categorized as `case_status`.
+- The dataset also includes the final disposition of each application, categorized as `case_status`.
 
 ## Project Structure
 
