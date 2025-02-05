@@ -8,4 +8,5 @@ imbalanced-learn
 xgboost
 catboost
 pymongo
+evidently
 # -e .
