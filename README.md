@@ -36,6 +36,7 @@ Successful implementation of this model will reduce processing time and administ
 ├── notebook
 │   ├── data
 │   │   └── EasyVisa.csv
+│   ├── data_drift_report.html
 │   ├── eda.ipynb
 │   └── model_training.ipynb
 ├── src
@@ -58,6 +59,7 @@ Successful implementation of this model will reduce processing time and administ
 │   ├── entity
 │   │   ├── __init__.py
 │   │   ├── artifact_entity.py
+│   │   ├── estimator.py
 │   │   └── config_entity.py
 │   ├── exception
 │   │   └─── __init__.py
