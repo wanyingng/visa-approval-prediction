@@ -10,7 +10,6 @@ from sklearn.compose import ColumnTransformer
 from src.constants import TARGET_COLUMN, SCHEMA_FILE_PATH, DATASET_YEAR
 from src.entity.config_entity import DataTransformationConfig
 from src.entity.artifact_entity import DataTransformationArtifact, DataIngestionArtifact, DataValidationArtifact
-from src.entity.estimator import TargetValueMapping
 
 from src.exception import CustomException
 from src.logger import logging
@@ -92,7 +91,7 @@ class DataTransformation:
                 logging.info("Added company_age column to the Train dataset")
                 drop_cols = self._schema_config['drop_columns']
                 input_feature_train_df = drop_columns(df=input_feature_train_df, cols=drop_cols)
-                target_feature_train_df = target_feature_train_df.replace(TargetValueMapping()._asdict())
+                target_feature_train_df = (target_feature_train_df == 'Certified').astype(int)
                 logging.info("Dropped the columns in drop_cols of Train dataset")
 
                 input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN], axis=1)
@@ -101,7 +100,7 @@ class DataTransformation:
                 input_feature_test_df['company_age'] = DATASET_YEAR - input_feature_test_df['yr_of_estab']
                 logging.info("Added company_age column to the Test dataset")
                 input_feature_test_df = drop_columns(df=input_feature_test_df, cols=drop_cols)
-                target_feature_test_df = target_feature_test_df.replace(TargetValueMapping()._asdict())
+                target_feature_test_df = (target_feature_test_df == 'Certified').astype(int)
                 logging.info("Dropped the columns in drop_cols of Test dataset")
 
                 logging.info("Applying preprocessor on both train and test dataframe")

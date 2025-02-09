@@ -1,5 +1,5 @@
 import os
-from datetime import date
+
 
 DATABASE_NAME: str = "US_VISA"
 COLLECTION_NAME: str = "visa_data"
@@ -16,7 +16,6 @@ MODEL_FILE_NAME: str = "model.pkl"
 PREPROCESSOR_FILE_NAME = "preprocessor.pkl"
 
 TARGET_COLUMN = "case_status"
-CURRENT_YEAR = date.today().year
 DATASET_YEAR = 2016
 
 SCHEMA_FILE_PATH = os.path.join("config", "schema.yaml")

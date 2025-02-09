@@ -85,4 +85,4 @@ def drop_columns(df: DataFrame, cols: list) -> DataFrame:
         logging.info("Columns successfully dropped from DataFrame")
         return df
     except Exception as e:
-        raise CustomException(e, sys) from e
+        raise CustomException(e, sys)
