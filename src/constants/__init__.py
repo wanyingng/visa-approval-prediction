@@ -17,6 +17,7 @@ PREPROCESSOR_FILE_NAME = "preprocessor.pkl"
 
 TARGET_COLUMN = "case_status"
 CURRENT_YEAR = date.today().year
+DATASET_YEAR = 2016
 
 SCHEMA_FILE_PATH = os.path.join("config", "schema.yaml")
 
@@ -31,3 +32,8 @@ DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO: float = 0.2
 DATA_VALIDATION_DIR_NAME: str = "data_validation"
 DATA_VALIDATION_DRIFT_REPORT_DIR: str = "drift_report"
 DATA_VALIDATION_DRIFT_REPORT_FILE_NAME: str = "report.yaml"
+
+# Constants for Data Transformation
+DATA_TRANSFORMATION_DIR_NAME: str = "data_transformation"
+DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR: str = "transformed"
+DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR: str = "transformed_object"

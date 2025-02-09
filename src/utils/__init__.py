@@ -3,6 +3,8 @@ import sys
 
 import yaml
 from pandas import DataFrame
+import numpy as np
+import dill
 
 from src.logger import logging
 from src.exception import CustomException
@@ -16,7 +18,7 @@ def read_yaml_file(file_path: str) -> dict:
         raise CustomException(e, sys)
 
 
-def write_yaml_file(file_path: str, content: object, replace: bool=False) -> None:
+def write_yaml_file(file_path: str, content: object, replace: bool = False) -> None:
     try:
         if replace and os.path.exists(file_path):
             os.remove(file_path)
@@ -27,7 +29,42 @@ def write_yaml_file(file_path: str, content: object, replace: bool=False) -> Non
         raise CustomException(e, sys)
 
 
-def drop_columns(df: DataFrame, cols: list)-> DataFrame:
+def save_object(file_path: str, obj: object) -> None:
+    logging.info("Entered the save_object method of utils")
+    try:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "wb") as file_obj:
+            dill.dump(obj, file_obj)
+        logging.info("Exited the save_object method of utils")
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
+def save_numpy_array_data(file_path: str, array: np.array) -> None:
+    """
+    Save numpy array data to file.
+
+    Args:
+        file_path: The string location of file to be saved.
+        array: The numpy array data to be saved.
+
+    Returns:
+        None.
+
+    Raises:
+        CustomException: If array is not successfully saved to the file location.
+
+    """
+    try:
+        dir_path = os.path.dirname(file_path)
+        os.makedirs(dir_path, exist_ok=True)
+        with open(file_path, 'wb') as file_obj:
+            np.save(file_obj, array)
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
+def drop_columns(df: DataFrame, cols: list) -> DataFrame:
     """
     Drop the columns of a pandas DataFrame.
 
