@@ -40,6 +40,17 @@ def save_object(file_path: str, obj: object) -> None:
         raise CustomException(e, sys)
 
 
+def load_object(file_path: str) -> object:
+    logging.info("Entered the load_object method of utils")
+    try:
+        with open(file_path, "rb") as file_obj:
+            obj = dill.load(file_obj)
+        logging.info("Exited the load_object method of utils")
+        return obj
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
 def save_numpy_array_data(file_path: str, array: np.array) -> None:
     """
     Save numpy array data to file.
@@ -60,6 +71,27 @@ def save_numpy_array_data(file_path: str, array: np.array) -> None:
         os.makedirs(dir_path, exist_ok=True)
         with open(file_path, 'wb') as file_obj:
             np.save(file_obj, array)
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
+def load_numpy_array_data(file_path: str) -> np.array:
+    """
+    load numpy array data from file.
+
+    Args:
+        file_path: The string location of file to be loaded.
+
+    Returns:
+        The loaded numpy array data.
+
+    Raises:
+        CustomException: If array is not successfully loaded from the file location.
+
+    """
+    try:
+        with open(file_path, 'rb') as file_obj:
+            return np.load(file_obj)
     except Exception as e:
         raise CustomException(e, sys)
 
