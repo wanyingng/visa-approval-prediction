@@ -77,7 +77,7 @@ def save_numpy_array_data(file_path: str, array: np.array) -> None:
 
 def load_numpy_array_data(file_path: str) -> np.array:
     """
-    load numpy array data from file.
+    Load numpy array data from file.
 
     Args:
         file_path: The string location of file to be loaded.
