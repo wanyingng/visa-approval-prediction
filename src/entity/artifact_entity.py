@@ -33,3 +33,11 @@ class ClassificationMetricArtifact:
 class ModelTrainerArtifact:
     trained_model_file_path: str
     metric_artifact: ClassificationMetricArtifact
+
+
+@dataclass
+class ModelEvaluationArtifact:
+    is_model_accepted: bool # Whether current model is better than production model
+    accuracy_difference: float  # The difference in accuracy between current model and production model
+    s3_model_path: str  # The model.pkl location in s3 bucket
+    trained_model_path: str # The model.pkl location in artifact folder

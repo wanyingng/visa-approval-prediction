@@ -1,4 +1,5 @@
 import os
+from datetime import date
 
 
 DATABASE_NAME: str = "US_VISA"
@@ -17,6 +18,7 @@ PREPROCESSOR_FILE_NAME = "preprocessor.pkl"
 
 TARGET_COLUMN = "case_status"
 DATASET_YEAR = 2016
+CURRENT_YEAR = date.today().year
 
 SCHEMA_FILE_PATH = os.path.join("config", "schema.yaml")
 
@@ -27,6 +29,10 @@ PARAM_KEY = "params"
 MODEL_SELECTION_KEY = "model_selection"
 SEARCH_PARAM_GRID_KEY = "search_param_grid"
 MODEL_CONFIG_FILE_NAME = "model.yaml"
+
+AWS_ACCESS_KEY_ID_ENV_KEY = "AWS_ACCESS_KEY_ID"
+AWS_SECRET_ACCESS_KEY_ENV_KEY = "AWS_SECRET_ACCESS_KEY"
+REGION_NAME = "ap-southeast-1"
 
 # Constants for Data Ingestion
 DATA_INGESTION_COLLECTION_NAME: str = "visa_data"
@@ -51,3 +57,8 @@ MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model"
 MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl"
 MODEL_TRAINER_EXPECTED_SCORE: float = 0.7
 MODEL_TRAINER_MODEL_CONFIG_FILE_PATH: str = os.path.join("config", MODEL_CONFIG_FILE_NAME)
+
+# Constants for Model Evaluation
+MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
+MODEL_BUCKET_NAME = "usvisa-model2025"
+MODEL_PUSHER_S3_KEY = "model-registry"
