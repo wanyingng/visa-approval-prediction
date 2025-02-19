@@ -60,5 +60,5 @@ MODEL_TRAINER_MODEL_CONFIG_FILE_PATH: str = os.path.join("config", MODEL_CONFIG_
 
 # Constants for Model Evaluation
 MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
-MODEL_BUCKET_NAME = "usvisa-model2025"
+MODEL_BUCKET_NAME = "visa-model2025"
 MODEL_PUSHER_S3_KEY = "model-registry"

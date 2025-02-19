@@ -41,3 +41,9 @@ class ModelEvaluationArtifact:
     accuracy_difference: float  # The difference in accuracy between current model and production model
     s3_model_path: str  # The model.pkl location in s3 bucket
     trained_model_path: str # The model.pkl location in artifact folder
+
+
+@dataclass
+class ModelPusherArtifact:
+    bucket_name: str
+    s3_model_path: str
