@@ -1,7 +1,6 @@
 import os
 import boto3
 
-from src.exception import CustomException
 from src.constants import AWS_SECRET_ACCESS_KEY_ENV_KEY, AWS_ACCESS_KEY_ID_ENV_KEY, REGION_NAME
 
 
@@ -17,9 +16,9 @@ class S3Client:
 
             # Ensure that the AWS credentials are set as environment variables
             if __access_key_id is None:
-                raise CustomException(f"Environment variable: {AWS_ACCESS_KEY_ID_ENV_KEY} is not set.")
+                raise Exception(f"Environment variable: {AWS_ACCESS_KEY_ID_ENV_KEY} is not set.")
             if __secret_access_key is None:
-                raise CustomException(f"Environment variable: {AWS_SECRET_ACCESS_KEY_ENV_KEY} is not set.")
+                raise Exception(f"Environment variable: {AWS_SECRET_ACCESS_KEY_ENV_KEY} is not set.")
 
             S3Client.s3_resource = boto3.resource('s3',
                                                   aws_access_key_id=__access_key_id,
