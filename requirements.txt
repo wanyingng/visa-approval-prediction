@@ -13,4 +13,6 @@ dill
 boto3
 mypy-boto3-s3
 botocore
+fastapi
+python-multipart
 # -e .
