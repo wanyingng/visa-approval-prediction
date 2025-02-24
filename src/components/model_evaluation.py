@@ -35,6 +35,7 @@ class ModelEvaluation:
         except Exception as e:
             raise CustomException(e, sys)
 
+
     def get_best_model(self) -> Optional[VisaEstimator]:
         """Retrieves model in production and returns model object if available in s3 storage."""
         try:
@@ -50,7 +51,7 @@ class ModelEvaluation:
 
 
     def evaluate_model(self) -> EvaluateModelResponse:
-        """Evaluates trained model with production model and returns the result. to select the best model out of the two."""
+        """Evaluates trained model with production model and returns the result."""
         try:
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
             test_df['company_age'] = CURRENT_YEAR - test_df['yr_of_estab']
