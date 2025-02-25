@@ -9,13 +9,13 @@ The US Immigration and Nationality Act (INA) permits foreign workers to enter th
 OFLC processes job certification applications for employers seeking to bring foreign workers into US and grants certifications in those cases where employers can demonstrate that there are insufficient US workers available to perform the work at wages that meet or exceed the wage paid for the occupation in the area of intended employment.
 
 #### Objective
-In FY 2016, the OFLC processed 775,979 employer applications for 1,699,957 positions on temporary and permanent labor certifications. This was a 9% increase in the overall number of processed applications from the previous year. The process of reviewing every case is becoming a tedious task as the number of applicants is increasing every year.
+In FY2016, the OFLC processed 775,979 employer applications for 1,699,957 positions on temporary and permanent labor certifications. This was a 9% increase in the overall number of processed applications from the previous year. The process of reviewing every case is becoming a tedious task as the number of applicants is increasing every year.
 
 The increasing number of applicants every year calls for a Machine Learning based solution that can help in shortlisting the candidates with higher chances of VISA approval. OFLC has hired the firm EasyVisa for data-driven solutions. You as a data scientist at EasyVisa have to analyze the data provided and, with the help of a classification model:
 * Facilitate the process of visa approvals.
 * Recommend a suitable profile for the applicants for whom the visa should be certified or denied based on the drivers that significantly influence the case status.
 
-Successful implementation of this model will reduce processing time and administrative workload for OFLC when integrated into their current workflow.
+Successful implementation of this model promises to yield significant improvements for OFLC, including reduced processing time, operating costs, and administrative workload.
 
 ## Dataset
 **Source**: [Kaggle - EasyVisa Dataset](https://www.kaggle.com/datasets/moro23/easyvisa-dataset)
@@ -30,17 +30,21 @@ Successful implementation of this model will reduce processing time and administ
 ## Project Structure
 
 ```bash
-├── config
+visa-approval-prediction/
+├── config/
 │   ├── model.yaml
 │   └── schema.yaml
-├── notebook
-│   ├── data
+├── notebook/
+│   ├── data/
 │   │   └── EasyVisa.csv
 │   ├── data_drift_report.html
 │   ├── eda.ipynb
 │   └── model_training.ipynb
-├── src
-│   ├── components
+├── src/
+│   ├── cloud_storage/
+│   │   ├── __init__.py
+│   │   └── aws_storage.py
+│   ├── components/
 │   │   ├── __init__.py
 │   │   ├── data_ingestion.py
 │   │   ├── data_transformation.py
@@ -48,30 +52,45 @@ Successful implementation of this model will reduce processing time and administ
 │   │   ├── model_evaluation.py
 │   │   ├── model_pusher.py
 │   │   └── model_trainer.py
-│   ├── configuration
+│   ├── configuration/
 │   │   ├── __init__.py
+│   │   ├── aws_connection.py
 │   │   └── mongo_db_connection.py
-│   ├── constants
+│   ├── constants/
 │   │   └── __init__.py
-│   ├── data_access
+│   ├── data_access/
 │   │   ├── __init__.py
 │   │   └── visa_data.py
-│   ├── entity
+│   ├── entity/
 │   │   ├── __init__.py
 │   │   ├── artifact_entity.py
+│   │   ├── config_entity.py
 │   │   ├── estimator.py
-│   │   └── config_entity.py
-│   ├── exception
+│   │   └── s3_estimator.py
+│   ├── exception/
 │   │   └─── __init__.py
-│   ├── logger
+│   ├── logger/
 │   │   └── __init__.py
-│   ├── pipeline
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── model_factory.py
+│   ├── pipeline/
 │   │   ├── __init__.py
 │   │   ├── predict.py
 │   │   └── train.py
-│   ├── utils
+│   ├── utils/
 │   │   └── __init__.py
 │   └── __init__.py
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   ├── images/
+│   │   ├── favicon.ico
+│   │   └── visa-approval.png
+│   └── js/
+│       └── script.js
+├── templates/
+│   └── index.html
 ├── .gitignore
 ├── Dockerfile
 ├── README.md
@@ -124,6 +143,6 @@ docker build -t visa-approval-service .
 docker run -it --rm -p 9696:9696 visa-approval-service
 ```
 
-**6. Access the Flask app through your web browser**
+**6. Access the FastAPI app through your web browser**
 
-Enter `http://127.0.0.1:9696/predict` or `http://localhost:9696/predict` as the URL.
+Enter `http://127.0.0.1:9696/` or `http://localhost:9696/` as the URL.
