@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g=" crossorigin="anonymous">
+    <!-- https://fonts.google.com/specimen/Patrick+Hand -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Patrick Hand">
+
+    <link href="{{url_for('static', path='/images/favicon.ico')}}" rel="icon">
+    <link href="{{url_for('static', path='/css/style.css')}}" rel="stylesheet">
+
+    <title>U.S. Work Visa Approval Prediction App</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light static-top">
+        <div class="container-fluid"></div>
+    </nav>
+    <section>
+        <div class="container-fluid">
+            <div class="container">
+                <h1>Predict the United States work visa approval outcome</h1>
+                <p>Submit all of the details below to receive your predicted outcome</p>
+                <hr>
+                <form id="visaForm" action="/predict" method="post">
+                    <div class="mb-3">
+                        <label for="continent">Continent of origin</label>
+                        <select class="form-control" id="continent" name="continent" required>
+                            <option value="" disabled selected>Select a continent</option>
+                            <option>Africa</option>
+                            <option>Asia</option>
+                            <option>Europe</option>
+                            <option>North America</option>
+                            <option>Oceania</option>
+                            <option>South America</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="education_of_employee">Highest education qualification</label>
+                        <select class="form-control" id="education_of_employee" name="education_of_employee" required>
+                            <option value="" disabled selected>Select a qualification</option>
+                            <option>High School</option>
+                            <option>Bachelor's</option>
+                            <option>Master's</option>
+                            <option>Doctorate</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Prior work experience</label><br>
+                        <input type="radio" id="experience_yes" name="has_job_experience" value="Y" required>
+                        <label for="experience_yes">Yes, I have work experience</label><br>
+                        <input type="radio" id="experience_no" name="has_job_experience" value="N" required>
+                        <label for="experience_no">No, I'm a fresh graduate</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Job training</label><br>
+                        <input type="radio" id="training_yes" name="requires_job_training" value="Y" required>
+                        <label for="training_yes">Yes, I'd need training</label><br>
+                        <input type="radio" id="training_no" name="requires_job_training" value="N" required>
+                        <label for="training_no">No, I'm fine without training</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="yr_of_estab">Company year of establishment</label>
+                        <input type="number" class="form-control" id="yr_of_estab" name="yr_of_estab" min="1800"
+                            max="2025" placeholder="1800" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="no_of_employees">Company size (in terms of number of employees)</label>
+                        <input type="number" class="form-control" id="no_of_employees" name="no_of_employees" min="1"
+                            max="3000000" placeholder="1 to 3,000,000" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="region_of_employment">Region of employment in US</label>
+                        <select class="form-control" id="region_of_employment" name="region_of_employment" required>
+                            <option value="" disabled selected>Select a region</option>
+                            <option>Island</option>
+                            <option>Midwest</option>
+                            <option>Northeast</option>
+                            <option>South</option>
+                            <option>West</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="prevailing_wage">Prevailing wage (in USD)</label>
+                        <input type="number" class="form-control" id="prevailing_wage" name="prevailing_wage" min="7.25"
+                            max="1000000" placeholder="$7.25 to $1,000,000" step="0.01" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="unit_of_wage">Unit of prevailing wage</label>
+                        <select class="form-control" id="unit_of_wage" name="unit_of_wage" required>
+                            <option value="" disabled selected>Select a time unit</option>
+                            <option>Hour</option>
+                            <option>Week</option>
+                            <option>Month</option>
+                            <option>Year</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Employment type</label><br>
+                        <input type="radio" id="full_time_yes" name="full_time_position" value="Y" required>
+                        <label for="full_time_yes">Full-time</label><br>
+                        <input type="radio" id="full_time_no" name="full_time_position" value="N" required>
+                        <label for="full_time_no">Part-time</label>
+                    </div>
+
+                    <input class="btn-submit black" type="submit" value="Submit" required />
+            </div>
+            </form>
+        </div>
+        <br>
+        <div class="text-center text-black">
+            <h4 class="display-8">Predicted Visa Outcome:</h4>
+            <h4 id="prediction" class="display-5 fw-bolder">{{context}}</h4>
+        </div>
+        </div>
+    </section>
+    <footer class="mt-5 mb-5 small text-center text-muted">
+        <p class="footer-heart">Made with
+            <g-emoji class="g-emoji" alias="heart"
+                fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png">
+                <img class="emoji" alt="heart" height="20" width="20"
+                    src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png">
+            </g-emoji> by <a href="https://github.com/wanyingng">Quinn</a>
+        </p>
+    </footer>
+    <script src="{{url_for('static', path='/js/script.js')}}"></script>
+</body>
+
+</html>
