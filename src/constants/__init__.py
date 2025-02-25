@@ -62,3 +62,7 @@ MODEL_TRAINER_MODEL_CONFIG_FILE_PATH: str = os.path.join("config", MODEL_CONFIG_
 MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
 MODEL_BUCKET_NAME = "visa-model2025"
 MODEL_PUSHER_S3_KEY = "model-registry"
+
+# Constants for FastAPI
+APP_HOST = "0.0.0.0"
+APP_PORT = 9696
