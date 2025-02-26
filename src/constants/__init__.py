@@ -9,6 +9,8 @@ MONGODB_URL_KEY: str = "MONGODB_URL"
 PIPELINE_NAME: str = "visa"
 ARTIFACT_DIR: str = "artifact"
 
+SEED: int = 42
+
 FILE_NAME: str = "data.csv"
 TRAIN_FILE_NAME: str = "train.csv"
 TEST_FILE_NAME: str = "test.csv"

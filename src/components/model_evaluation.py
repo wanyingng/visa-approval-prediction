@@ -37,12 +37,12 @@ class ModelEvaluation:
 
 
     def get_best_model(self) -> Optional[VisaEstimator]:
-        """Retrieves model in production and returns model object if available in s3 storage."""
+        """Retrieves production model and returns the model object if available in s3 storage."""
         try:
             bucket_name = self.model_eval_config.bucket_name
             model_path = self.model_eval_config.s3_model_key_path
             visa_estimator = VisaEstimator(bucket_name=bucket_name,
-                                             model_path=model_path)
+                                           model_path=model_path)
             if visa_estimator.is_model_present(model_path=model_path):
                 return visa_estimator
             return None
@@ -51,7 +51,7 @@ class ModelEvaluation:
 
 
     def evaluate_model(self) -> EvaluateModelResponse:
-        """Evaluates trained model with production model and returns the result."""
+        """Evaluates trained model against production model and returns the evaluation result."""
         try:
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
             test_df['company_age'] = CURRENT_YEAR - test_df['yr_of_estab']
@@ -84,7 +84,8 @@ class ModelEvaluation:
                 is_model_accepted=evaluate_model_response.is_model_accepted,
                 s3_model_path=s3_model_path,
                 trained_model_path=self.model_trainer_artifact.trained_model_file_path,
-                accuracy_difference=evaluate_model_response.difference)
+                accuracy_difference=evaluate_model_response.difference
+            )
             logging.info(f"Model evaluation artifact: {model_evaluation_artifact}")
             return model_evaluation_artifact
         except Exception as e:

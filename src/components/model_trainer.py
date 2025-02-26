@@ -23,7 +23,7 @@ class ModelTrainer:
 
 
     def get_model_report(self, train: np.array, test: np.array) -> Tuple[object, object]:
-        """Retrieve the best model report."""
+        """Retrieves the best model report."""
         try:
             model_factory = ModelFactory(model_config_path=self.model_trainer_config.model_config_file_path)
             logging.info("Retrieved best model object and its report")
@@ -48,7 +48,7 @@ class ModelTrainer:
 
 
     def initiate_model_trainer(self) -> ModelTrainerArtifact:
-        """Initiate the model trainer steps and return model trainer artifact."""
+        """Initiates the model trainer steps and returns model trainer artifact."""
         logging.info("Entered initiate_model_trainer method of ModelTrainer class")
         try:
             train_arr = load_numpy_array_data(file_path=self.data_transformation_artifact.transformed_train_file_path)
@@ -56,7 +56,7 @@ class ModelTrainer:
             best_model_report, metric_artifact = self.get_model_report(train=train_arr, test=test_arr)
             preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
 
-            # Set an evaluation threshold that aligns with the business goals
+            # Set an evaluation threshold that aligns with business goals
             if best_model_report.best_score < self.model_trainer_config.expected_accuracy:
                 logging.info("No best model found")
                 raise CustomException("No best model found")
@@ -70,7 +70,7 @@ class ModelTrainer:
 
             model_trainer_artifact = ModelTrainerArtifact(
                 trained_model_file_path=self.model_trainer_config.trained_model_file_path,
-                metric_artifact=metric_artifact,
+                metric_artifact=metric_artifact
             )
             logging.info(f"Model trainer artifact: {model_trainer_artifact}")
             return model_trainer_artifact

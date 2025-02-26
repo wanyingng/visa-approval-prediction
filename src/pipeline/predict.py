@@ -54,7 +54,7 @@ class VisaData:
                 "prevailing_wage": [self.prevailing_wage],
                 "unit_of_wage": [self.unit_of_wage],
                 "full_time_position": [self.full_time_position],
-                "company_age": [self.company_age],
+                "company_age": [self.company_age]
             }
             logging.info("Created visa dictionary")
             logging.info("Exited convert_to_dict method of VisaData class")
@@ -89,6 +89,7 @@ class VisaClassifier:
         """Returns the prediction result in string format for local deployment."""
         try:
             logging.info("Entered predict method of VisaClassifier class")
+            # Change the model_path as needed after model training
             model_path = os.path.join("artifact/02_20_2025_13_04_04/model_trainer/trained_model", "model.pkl")
             print("Start loading")
             model = load_object(file_path=model_path)

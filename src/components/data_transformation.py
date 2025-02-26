@@ -39,7 +39,7 @@ class DataTransformation:
 
 
     def get_data_transformer_object(self) -> Pipeline:
-        """Create and return a data transformer object."""
+        """Creates and returns a data transformer object."""
         logging.info("Entered get_data_transformer_object method of DataTransformation class")
         try:
             numeric_transformer = StandardScaler()
@@ -74,7 +74,7 @@ class DataTransformation:
 
 
     def initiate_data_transformation(self) -> DataTransformationArtifact:
-        """Initiate the data transformation component of training pipeline."""
+        """Initiates the data transformation component of training pipeline."""
         try:
             if self.data_validation_artifact.is_validated:
                 logging.info("Starting data transformation")

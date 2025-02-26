@@ -122,11 +122,8 @@ class SimpleStorageService:
             raise CustomException(e, sys)
 
 
-    def upload_df_as_csv(self,
-                         data_frame: DataFrame,
-                         local_filename: str,
-                         bucket_filename: str,
-                         bucket_name: str) -> None:
+    def upload_df_as_csv(self, data_frame: DataFrame, local_filename: str,
+                         bucket_filename: str, bucket_name: str) -> None:
         """Converts dataframe to csv and uploads the csv file to bucket_filename in bucket_name bucket."""
         logging.info("Entered the upload_df_as_csv method of SimpleStorageService class")
         try:

@@ -5,7 +5,7 @@ from pandas import DataFrame
 import json
 
 from evidently.report import Report
-from evidently.metric_preset import DataDriftPreset, TargetDriftPreset
+from evidently.metric_preset import DataDriftPreset
 
 from src.exception import CustomException
 from src.logger import logging
@@ -27,7 +27,7 @@ class DataValidation:
 
 
     def validate_number_of_columns(self, dataframe: DataFrame) -> bool:
-        """Validate the number of columns and return a bool value based on the validation outcome."""
+        """Validates the number of columns and returns a bool value based on the validation outcome."""
         try:
             status = len(dataframe.columns) == len(self._schema_config["columns"])
             logging.info(f"All required columns are present: [{status}]")
@@ -37,7 +37,7 @@ class DataValidation:
 
 
     def is_column_exist(self, df: DataFrame) -> bool:
-        """Validate the existence of both numerical and categorical columns."""
+        """Validates the existence of both numerical and categorical columns."""
         try:
             dataframe_columns = df.columns
             missing_numerical_columns = []
@@ -69,7 +69,7 @@ class DataValidation:
 
 
     def detect_dataset_drift(self, reference_df: DataFrame, current_df: DataFrame) -> bool:
-        """Validate for data drift and return a bool value based on the validation outcome."""
+        """Validates for data drift and returns a bool value based on the validation outcome."""
         try:
             # Create a report
             report = Report(metrics=[DataDriftPreset()])
@@ -88,7 +88,7 @@ class DataValidation:
 
 
     def initiate_data_validation(self) -> DataValidationArtifact:
-        """Initiate the data validation component of training pipeline."""
+        """Initiates the data validation component of training pipeline."""
         try:
             validation_error_msg = ""
             logging.info("Starting data validation")
@@ -121,10 +121,11 @@ class DataValidation:
             else:
                 logging.info(f"Validation_error: {validation_error_msg}")
 
-            data_validation_artifact = DataValidationArtifact(is_validated=is_validated,
-                                                              message=validation_error_msg,
-                                                              drift_report_file_path=self.data_validation_config.drift_report_file_path
-                                                              )
+            data_validation_artifact = DataValidationArtifact(
+                is_validated=is_validated,
+                message=validation_error_msg,
+                drift_report_file_path=self.data_validation_config.drift_report_file_path
+            )
             logging.info(f"Data validation artifact: {data_validation_artifact}")
             return data_validation_artifact
         except Exception as e:

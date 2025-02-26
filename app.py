@@ -91,10 +91,10 @@ async def predict_visa_status(request: Request):
         visa_df = visa_data.convert_to_dataframe()
         model = VisaClassifier()
 
-        # Use for local deployment
+        # Use in local deployment
         outcome = model.predict_local(dataframe=visa_df)[0]
 
-        # Use for production (AWS S3)
+        # Use in production (AWS S3)
         # outcome = model.predict_s3(dataframe=visa_df)[0]
 
         status = "Certified" if outcome == 1 else "Denied"

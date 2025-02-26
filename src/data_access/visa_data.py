@@ -18,10 +18,8 @@ class VisaData:
             raise CustomException(e, sys)
 
 
-    def export_collection_as_dataframe(self, collection_name:str, database_name:Optional[str]=None) -> pd.DataFrame:
-        """
-        Export entire MongoDB collection as pandas dataframe
-        """
+    def export_collection_as_dataframe(self, collection_name: str, database_name: Optional[str] = None) -> pd.DataFrame:
+        """Exports entire MongoDB collection as pandas dataframe."""
         try:
             if database_name is None:
                 collection = self.mongo_client.database[collection_name]
