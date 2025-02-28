@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 9696
 
-ENTRYPOINT ["uvicorn", "--bind=0.0.0.0:9696", "app:app"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "9696"]
