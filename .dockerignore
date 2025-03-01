@@ -1,0 +1,27 @@
+# Ignore Python artifacts
+*.pyc
+__pycache__/
+logs/
+*.egg-info/
+notebook/catboost_info/
+.ipynb_checkpoints/
+artifact/
+
+# Ignore virtual environments
+.venv/
+
+# Ignore notebooks and data
+notebook/*.ipynb
+notebook/*.html
+
+# Ignore setup and template files
+setup.py
+template.py
+
+# Ignore Docker related files that are not needed in the build context.
+.dockerignore
+Dockerfile
+
+# Ignore git specific files
+.git/
+.github/
