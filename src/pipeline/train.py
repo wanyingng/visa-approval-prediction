@@ -32,6 +32,7 @@ class TrainPipeline:
         self.data_transformation_config = DataTransformationConfig()
         self.model_trainer_config = ModelTrainerConfig()
         self.model_evaluation_config = ModelEvaluationConfig()
+        self.model_pusher_config = ModelPusherConfig()
 
 
     def start_data_ingestion(self) -> DataIngestionArtifact:
@@ -45,7 +46,7 @@ class TrainPipeline:
             logging.info("Exited the start_data_ingestion method of TrainPipeline class")
             return data_ingestion_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
@@ -59,13 +60,12 @@ class TrainPipeline:
             logging.info("Exited the start_data_validation method of TrainPipeline class")
             return data_validation_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def start_data_transformation(self,
                                   data_ingestion_artifact: DataIngestionArtifact,
-                                  data_validation_artifact: DataValidationArtifact
-                                  ) -> DataTransformationArtifact:
+                                  data_validation_artifact: DataValidationArtifact) -> DataTransformationArtifact:
         """Kickstarts data transformation component and returns the data transformation artifact."""
         try:
             data_transformation = DataTransformation(data_ingestion_artifact=data_ingestion_artifact,
@@ -74,7 +74,7 @@ class TrainPipeline:
             data_transformation_artifact = data_transformation.initiate_data_transformation()
             return data_transformation_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
@@ -85,7 +85,7 @@ class TrainPipeline:
             model_trainer_artifact = model_trainer.initiate_model_trainer()
             return model_trainer_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def start_model_evaluation(self,
@@ -99,7 +99,7 @@ class TrainPipeline:
             model_evaluation_artifact = model_evaluation.initiate_model_evaluation()
             return model_evaluation_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def start_model_pusher(self, model_evaluation_artifact: ModelEvaluationArtifact) -> ModelPusherArtifact:
@@ -110,7 +110,7 @@ class TrainPipeline:
             model_pusher_artifact = model_pusher.initiate_model_pusher()
             return model_pusher_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def run_pipeline(self) -> None:
@@ -120,7 +120,8 @@ class TrainPipeline:
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact = self.start_data_transformation(
                 data_ingestion_artifact=data_ingestion_artifact,
-                data_validation_artifact=data_validation_artifact)
+                data_validation_artifact=data_validation_artifact
+            )
             model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
             model_evaluation_artifact = self.start_model_evaluation(data_ingestion_artifact=data_ingestion_artifact,
                                                                     model_trainer_artifact=model_trainer_artifact)
@@ -129,4 +130,4 @@ class TrainPipeline:
                 return None
             model_pusher_artifact = self.start_model_pusher(model_evaluation_artifact=model_evaluation_artifact)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
