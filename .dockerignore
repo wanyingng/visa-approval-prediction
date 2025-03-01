@@ -18,7 +18,7 @@ notebook/*.html
 setup.py
 template.py
 
-# Ignore Docker related files that are not needed in the build context.
+# Ignore Docker related files that are not needed in the build context
 .dockerignore
 Dockerfile
 

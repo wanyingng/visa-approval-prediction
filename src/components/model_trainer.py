@@ -44,7 +44,7 @@ class ModelTrainer:
                                                            recall=recall)
             return best_model_report, metric_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def initiate_model_trainer(self) -> ModelTrainerArtifact:
@@ -75,4 +75,4 @@ class ModelTrainer:
             logging.info(f"Model trainer artifact: {model_trainer_artifact}")
             return model_trainer_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

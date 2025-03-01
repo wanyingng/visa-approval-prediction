@@ -33,4 +33,4 @@ class ModelPusher:
             logging.info("Exited initiate_model_pusher method of ModelPusher class")
             return model_pusher_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

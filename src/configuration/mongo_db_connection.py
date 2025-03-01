@@ -26,4 +26,4 @@ class MongoDBClient:
             self.database_name = database_name
             logging.info("MongoDB connection successful")
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

@@ -18,7 +18,7 @@ class DataIngestion:
         try:
             self.data_ingestion_config = data_ingestion_config
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def export_data_into_feature_store(self) -> DataFrame:
@@ -37,7 +37,7 @@ class DataIngestion:
             dataframe.to_csv(feature_store_file_path, index=False, header=True)
             return dataframe
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def split_data_into_train_test(self, dataframe: DataFrame) -> None:
@@ -58,7 +58,7 @@ class DataIngestion:
             logging.info(f"Exported train and test file path.")
             logging.info("Exited split_data_into_train_test method of DataIngestion class")
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
@@ -79,4 +79,4 @@ class DataIngestion:
             logging.info("Exited initiate_data_ingestion method of DataIngestion class")
             return data_ingestion_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

@@ -28,7 +28,7 @@ class VisaData:
             self.full_time_position = full_time_position
             self.company_age = CURRENT_YEAR - yr_of_estab
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def convert_to_dataframe(self) -> DataFrame:
@@ -37,7 +37,7 @@ class VisaData:
             visa_dict = self.convert_to_dict()
             return DataFrame(visa_dict)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def convert_to_dict(self):
@@ -60,7 +60,7 @@ class VisaData:
             logging.info("Exited convert_to_dict method of VisaData class")
             return visa_dict
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
 class VisaClassifier:
@@ -68,7 +68,7 @@ class VisaClassifier:
         try:
             self.prediction_pipeline_config = prediction_pipeline_config
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def predict_s3(self, dataframe: DataFrame) -> str:
@@ -82,7 +82,7 @@ class VisaClassifier:
             result = model.predict(dataframe)
             return result
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def predict_local(self, dataframe: DataFrame) -> str:
@@ -99,4 +99,4 @@ class VisaClassifier:
             print("Completed predicting: ", result)
             return result
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

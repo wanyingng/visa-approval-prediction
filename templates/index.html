@@ -11,8 +11,8 @@
     <!-- https://fonts.google.com/specimen/Patrick+Hand -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Patrick Hand">
 
-    <link href="{{url_for('static', path='/images/favicon.ico')}}" rel="icon">
-    <link href="{{url_for('static', path='/css/style.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/images/favicon.ico') }}" rel="icon">
+    <link href="{{ url_for('static', path='/css/style.css') }}" rel="stylesheet">
 
     <title>U.S. Work Visa Approval Prediction App</title>
 </head>
@@ -117,14 +117,14 @@
                         <label for="full_time_no">Part-time</label>
                     </div>
 
-                    <input class="btn-submit black" type="submit" value="Submit" required />
+                    <input class="btn-submit black" type="submit" value="Submit" required/>
             </div>
             </form>
         </div>
         <br>
         <div class="text-center text-black">
             <h4 class="display-8">Predicted Visa Outcome:</h4>
-            <h4 id="prediction" class="display-5 fw-bolder">{{context}}</h4>
+            <h4 id="prediction" class="display-5 fw-bolder">{{ context }}</h4>
         </div>
     </section>
     <footer class="mt-5 mb-5 small text-center text-muted">
@@ -136,7 +136,7 @@
             </g-emoji> by <a href="https://github.com/wanyingng">Quinn</a>
         </p>
     </footer>
-    <script src="{{url_for('static', path='/js/script.js')}}"></script>
+    <script src="{{ url_for('static', path='/js/script.js') }}"></script>
 </body>
 
 </html>

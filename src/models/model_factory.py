@@ -38,7 +38,7 @@ class ModelFactory:
             self.initialized_model_list = None
             self.grid_searched_best_model_list = None
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     @staticmethod
@@ -51,7 +51,7 @@ class ModelFactory:
                 setattr(instance_ref, key, value)
             return instance_ref
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     @staticmethod
@@ -61,7 +61,7 @@ class ModelFactory:
                 config = yaml.safe_load(yaml_file)
             return config
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     @staticmethod
@@ -88,10 +88,12 @@ class ModelFactory:
             class_ref = getattr(module, class_name)
             return class_ref
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
-    def execute_grid_search_operation(self, initialized_model: InitializedModelDetail, input_feature,
+    def execute_grid_search_operation(self,
+                                      initialized_model: InitializedModelDetail,
+                                      input_feature,
                                       output_feature) -> GridSearchedBestModel:
         """
         Perform parameter search operation and return the best model with its set of best parameters.
@@ -115,19 +117,25 @@ class ModelFactory:
             grid_search_cv_ref = ModelFactory.class_for_name(module_name=self.grid_search_cv_module,
                                                              class_name=self.grid_search_class_name)
 
-            grid_search_cv = grid_search_cv_ref(estimator=initialized_model.model,
-                                                param_grid=initialized_model.param_grid_search)
-            grid_search_cv = ModelFactory.update_property_of_class(grid_search_cv,
-                                                                   self.grid_search_property_data)
+            grid_search_cv = grid_search_cv_ref(
+                estimator=initialized_model.model,
+                param_grid=initialized_model.param_grid_search
+            )
+            grid_search_cv = ModelFactory.update_property_of_class(
+                grid_search_cv,
+                self.grid_search_property_data
+            )
             grid_search_cv.fit(input_feature, output_feature)
-            grid_searched_best_model = GridSearchedBestModel(model_serial_number=initialized_model.model_serial_number,
-                                                             model=initialized_model.model,
-                                                             best_model=grid_search_cv.best_estimator_,
-                                                             best_parameters=grid_search_cv.best_params_,
-                                                             best_score=grid_search_cv.best_score_)
+            grid_searched_best_model = GridSearchedBestModel(
+                model_serial_number=initialized_model.model_serial_number,
+                model=initialized_model.model,
+                best_model=grid_search_cv.best_estimator_,
+                best_parameters=grid_search_cv.best_params_,
+                best_score=grid_search_cv.best_score_
+            )
             return grid_searched_best_model
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def get_initialized_model_list(self) -> List[InitializedModelDetail]:
@@ -165,7 +173,7 @@ class ModelFactory:
             self.initialized_model_list = initialized_model_list
             return self.initialized_model_list
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def initiate_best_parameter_search_for_initialized_model(self,
@@ -192,7 +200,7 @@ class ModelFactory:
                                                       input_feature=input_feature,
                                                       output_feature=output_feature)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def initiate_best_parameter_search_for_initialized_models(self,
@@ -209,7 +217,7 @@ class ModelFactory:
                 self.grid_searched_best_model_list.append(grid_searched_best_model)
             return self.grid_searched_best_model_list
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     @staticmethod
@@ -220,7 +228,7 @@ class ModelFactory:
                 if model_data.model_serial_number == model_serial_number:
                     return model_data
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     @staticmethod
@@ -238,7 +246,7 @@ class ModelFactory:
             logging.info(f"Best model: {best_model}")
             return best_model
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def get_best_model(self, X, y, base_accuracy: float = 0.6) -> BestModel:
@@ -264,8 +272,11 @@ class ModelFactory:
             grid_searched_best_model_list = self.initiate_best_parameter_search_for_initialized_models(
                 initialized_model_list=initialized_model_list,
                 input_feature=X,
-                output_feature=y)
-            return ModelFactory.get_best_model_from_grid_searched_best_model_list(grid_searched_best_model_list,
-                                                                                  base_accuracy=base_accuracy)
+                output_feature=y
+            )
+            return ModelFactory.get_best_model_from_grid_searched_best_model_list(
+                grid_searched_best_model_list,
+                base_accuracy=base_accuracy
+            )
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

@@ -27,7 +27,7 @@ class DataTransformation:
             self.data_validation_artifact = data_validation_artifact
             self._schema_config = read_yaml_file(file_path=SCHEMA_FILE_PATH)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     @staticmethod
@@ -35,7 +35,7 @@ class DataTransformation:
         try:
             return pd.read_csv(file_path)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def get_data_transformer_object(self) -> Pipeline:
@@ -70,7 +70,7 @@ class DataTransformation:
             logging.info("Exited get_data_transformer_object method of DataTransformation class")
             return preprocessor
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def initiate_data_transformation(self) -> DataTransformationArtifact:
@@ -136,4 +136,4 @@ class DataTransformation:
             else:
                 raise Exception(self.data_validation_artifact.message)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

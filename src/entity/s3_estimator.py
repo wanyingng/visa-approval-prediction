@@ -52,7 +52,7 @@ class VisaEstimator:
                                 bucket_name=self.bucket_name,
                                 remove=remove)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def predict(self, dataframe: DataFrame):
@@ -61,4 +61,4 @@ class VisaEstimator:
                 self.loaded_model = self.load_model()
             return self.loaded_model.predict(dataframe=dataframe)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

@@ -26,4 +26,4 @@ class VisaModel:
             logging.info("Used the trained model to get predictions")
             return self.trained_model.predict(transformed_features)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

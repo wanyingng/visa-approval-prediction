@@ -15,7 +15,7 @@ class VisaData:
             # Connect to MongoDB
             self.mongo_client = MongoDBClient(database_name=DATABASE_NAME)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def export_collection_as_dataframe(self, collection_name: str, database_name: Optional[str] = None) -> pd.DataFrame:
@@ -32,4 +32,4 @@ class VisaData:
             df.replace({"na": np.nan}, inplace=True)
             return df
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e

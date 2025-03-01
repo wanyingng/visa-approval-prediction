@@ -33,7 +33,7 @@ class ModelEvaluation:
             self.data_ingestion_artifact = data_ingestion_artifact
             self.model_trainer_artifact = model_trainer_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def get_best_model(self) -> Optional[VisaEstimator]:
@@ -47,7 +47,7 @@ class ModelEvaluation:
                 return visa_estimator
             return None
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def evaluate_model(self) -> EvaluateModelResponse:
@@ -72,7 +72,7 @@ class ModelEvaluation:
             logging.info(f"Result: {result}")
             return result
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
 
     def initiate_model_evaluation(self) -> ModelEvaluationArtifact:
@@ -89,4 +89,4 @@ class ModelEvaluation:
             logging.info(f"Model evaluation artifact: {model_evaluation_artifact}")
             return model_evaluation_artifact
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
